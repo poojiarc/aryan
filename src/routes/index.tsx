@@ -87,14 +87,6 @@ function Hero() {
   );
 }
 
-function DiscountBanner() {
-  return (
-    <div className="gradient-gold py-2.5 text-center text-xs font-semibold text-forest-deep md:text-sm">
-      🎁 Get <strong>5% OFF</strong> on orders above £25 · Use code <strong className="rounded bg-forest-deep px-1.5 py-0.5 text-cream">ARYAN5</strong>
-    </div>
-  );
-}
-
 function ShippingBanner() {
   return (
     <section className="bg-forest text-cream">
@@ -123,19 +115,20 @@ function Categories() {
             key={c.id}
             to="/products"
             search={{ category: c.id }}
-            className={`reveal reveal-delay-${(idx % 3) + 1} group flex flex-col items-center gap-3 text-center`}
+            className={`reveal reveal-delay-${(idx % 3) + 1} group flex flex-col items-center gap-2 text-center`}
           >
-            <div className="relative flex h-24 w-24 items-center justify-center rounded-full gradient-forest text-4xl shadow-soft transition group-hover:shadow-glow group-hover:-translate-y-1 md:h-28 md:w-28">
-              <span className="absolute inset-0 rounded-full ring-2 ring-gold/40 ring-offset-2 ring-offset-cream opacity-0 group-hover:opacity-100 transition" />
+            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-forest-deep text-4xl shadow-soft transition-all duration-300 group-hover:bg-forest group-hover:shadow-glow group-hover:-translate-y-1 md:h-28 md:w-28">
+              <span className="absolute inset-0 rounded-full ring-4 ring-gold/20 ring-offset-4 ring-offset-cream opacity-0 group-hover:opacity-100 transition-all duration-300" />
               {c.emoji}
             </div>
-            <div>
-              <div className="text-sm font-semibold text-forest">{c.label}</div>
-              <div className="text-[11px] text-muted-foreground">{c.blurb}</div>
+            <div className="flex flex-col gap-0.5">
+              <div className="text-sm font-bold text-forest leading-tight">{c.label}</div>
+              <div className="text-[10px] text-muted-foreground leading-tight">{c.blurb}</div>
             </div>
           </Link>
         ))}
       </div>
+
     </section>
   );
 }
@@ -280,35 +273,57 @@ function Highlights() {
 
 function ContactStrip() {
   return (
-    <section className="mx-auto max-w-7xl px-4 pb-20 md:px-6">
-      <div className="reveal grid gap-5 md:grid-cols-3">
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-soft">
-          <Phone className="h-6 w-6 text-gold" />
-          <h3 className="mt-3 font-display text-xl text-forest">Call Us</h3>
-          <a href="tel:+447474140956" className="mt-1 block text-sm text-muted-foreground hover:text-forest">+44 74741 40956</a>
-          <a href={WHATSAPP_DIRECT} target="_blank" rel="noopener noreferrer" className="mt-1 block text-sm text-[#25D366] font-semibold">WhatsApp anytime</a>
+    <section className="mx-auto max-w-7xl px-4 pb-24 md:px-6">
+      <div className="reveal grid gap-6 md:grid-cols-3">
+        <div className="group rounded-[2rem] border border-border bg-card p-8 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-glow">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-forest/5 text-gold transition-colors group-hover:bg-gold group-hover:text-forest">
+            <Phone className="h-6 w-6" />
+          </div>
+          <h3 className="mt-6 font-display text-2xl text-forest">Call Us</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Order via phone or chat</p>
+          <div className="mt-6 space-y-2">
+            <a href="tel:+447474140956" className="block text-lg font-semibold text-forest hover:text-gold transition">+44 74741 40956</a>
+            <a href={WHATSAPP_DIRECT} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#25D366]/10 px-3 py-1 text-sm font-bold text-[#25D366] hover:bg-[#25D366] hover:text-white transition">
+              <WhatsAppIcon className="h-4 w-4" /> WhatsApp anytime
+            </a>
+          </div>
         </div>
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-soft">
-          <Mail className="h-6 w-6 text-gold" />
-          <h3 className="mt-3 font-display text-xl text-forest">Email</h3>
-          <a href="mailto:aryanhomemadefoods@gmail.com" className="mt-1 block break-all text-sm text-muted-foreground hover:text-forest">aryanhomemadefoods@gmail.com</a>
+
+        <div className="group rounded-[2rem] border border-border bg-card p-8 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-glow">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-forest/5 text-gold transition-colors group-hover:bg-gold group-hover:text-forest">
+            <Mail className="h-6 w-6" />
+          </div>
+          <h3 className="mt-6 font-display text-2xl text-forest">Email</h3>
+          <p className="mt-2 text-sm text-muted-foreground">For inquiries & support</p>
+          <div className="mt-6">
+            <a href="mailto:aryanhomemadefoods@gmail.com" className="block break-all text-base font-semibold text-forest hover:text-gold transition">aryanhomemadefoods@gmail.com</a>
+          </div>
         </div>
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-soft">
-          <MapPin className="h-6 w-6 text-gold" />
-          <h3 className="mt-3 font-display text-xl text-forest">Collection Points</h3>
-          <p className="mt-1 text-sm text-muted-foreground">London · Cambridge · Bournemouth · Coventry</p>
+
+        <div className="group rounded-[2rem] border border-border bg-card p-8 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-glow">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-forest/5 text-gold transition-colors group-hover:bg-gold group-hover:text-forest">
+            <MapPin className="h-6 w-6" />
+          </div>
+          <h3 className="mt-6 font-display text-2xl text-forest">Collection Points</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Collect your fresh order from</p>
+          <div className="mt-6">
+            <p className="text-base font-semibold text-forest leading-relaxed">
+              London · Cambridge · <br/>Bournemouth · Coventry
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
+
 function HomePage() {
   useReveal();
   return (
     <>
-      <DiscountBanner />
       <Hero />
+
       <ShippingBanner />
       <Categories />
       <About />

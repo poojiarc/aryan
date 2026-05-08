@@ -2,14 +2,17 @@ import { useState } from "react";
 import type { Product, WeightOption } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductImage } from "./ProductImage";
-import { Plus, Calendar } from "lucide-react";
+import { Plus, Minus, Calendar } from "lucide-react";
 import { WHATSAPP_DIRECT } from "@/lib/products";
 
 export function ProductCard({ product }: { product: Product }) {
   const weights = Object.keys(product.prices) as WeightOption[];
   const [weight, setWeight] = useState<WeightOption>(weights[0]);
-  const { add } = useCart();
+  const { add, lines, setQty, remove } = useCart();
   const price = product.prices[weight] ?? 0;
+  const lineId = `${product.id}__${weight}`;
+  const cartLine = lines.find(l => l.id === lineId);
+  const currentQty = cartLine?.qty ?? 0;
 
   const preBook = () => {
     const text = encodeURIComponent(`Hi! I'd like to pre-book: ${product.name} (${weight})`);
@@ -29,15 +32,15 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
         )}
       </div>
-      <div className="flex flex-1 flex-col gap-3 p-4">
-        <h3 className="font-display text-lg leading-tight text-forest">{product.name}</h3>
+      <div className="flex flex-1 flex-col gap-2 p-4">
+        <h3 className="font-display text-base leading-tight text-forest">{product.name}</h3>
 
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1">
           {weights.map((w) => (
             <button
               key={w}
               onClick={() => setWeight(w)}
-              className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+              className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition ${
                 weight === w
                   ? "bg-forest text-cream"
                   : "border border-border text-forest/70 hover:border-forest"
@@ -48,10 +51,10 @@ export function ProductCard({ product }: { product: Product }) {
           ))}
         </div>
 
-        <div className="mt-auto flex items-center justify-between gap-2">
+        <div className="mt-2 flex items-center justify-between gap-2 border-t border-forest/5 pt-3">
           <div>
-            <div className="font-display text-2xl font-semibold text-forest">£{price.toFixed(2)}</div>
-            <div className="text-[11px] text-muted-foreground">{weight === "1000g" ? "1kg" : weight}</div>
+            <div className="font-display text-xl font-bold text-forest">£{price.toFixed(2)}</div>
+            <div className="text-[10px] text-muted-foreground uppercase tracking-wider">{weight === "1000g" ? "1kg" : weight}</div>
           </div>
           {product.preBookOnly ? (
             <button
@@ -60,12 +63,31 @@ export function ProductCard({ product }: { product: Product }) {
             >
               <Calendar className="h-3.5 w-3.5" /> Pre-Book
             </button>
+          ) : currentQty > 0 ? (
+            <div className="flex flex-col items-end gap-1.5">
+              <span className="text-[9px] font-bold uppercase tracking-[0.1em] text-forest/50">Added</span>
+              <div className="flex items-center gap-2 rounded-full bg-forest/10 p-1">
+                <button
+                  onClick={() => currentQty === 1 ? remove(lineId) : setQty(lineId, currentQty - 1)}
+                  className="flex h-7 w-7 items-center justify-center rounded-full bg-forest text-cream transition hover:bg-forest-deep shadow-sm"
+                >
+                  <Minus className="h-3 w-3" />
+                </button>
+                <span className="min-w-[18px] text-center text-sm font-bold text-forest">{currentQty}</span>
+                <button
+                  onClick={() => setQty(lineId, currentQty + 1)}
+                  className="flex h-7 w-7 items-center justify-center rounded-full bg-forest text-cream transition hover:bg-forest-deep shadow-sm"
+                >
+                  <Plus className="h-3 w-3" />
+                </button>
+              </div>
+            </div>
           ) : (
             <button
               onClick={() => add(product, weight)}
-              className="flex items-center gap-1.5 rounded-full bg-forest px-3.5 py-2 text-xs font-semibold text-cream hover:bg-forest-deep transition"
+              className="flex items-center gap-1.5 rounded-full bg-forest px-5 py-2 text-xs font-semibold text-cream hover:bg-forest-deep transition shadow-soft hover:shadow-glow"
             >
-              <Plus className="h-3.5 w-3.5" /> Add
+              Add
             </button>
           )}
         </div>
@@ -73,3 +95,4 @@ export function ProductCard({ product }: { product: Product }) {
     </article>
   );
 }
+

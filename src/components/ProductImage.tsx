@@ -12,6 +12,7 @@ const palette: Record<string, [string, string, string]> = {
 
 export function ProductImage({ product }: { product: Product }) {
   const [bg, fg, emoji] = palette[product.category] ?? ["#1f5132", "#d4a437", "🍽️"];
+  
   return (
     <div
       className="relative flex h-full w-full items-center justify-center overflow-hidden"
@@ -27,7 +28,22 @@ export function ProductImage({ product }: { product: Product }) {
           backgroundSize: "14px 14px",
         }}
       />
-      <div className="relative text-center text-cream px-3">
+      
+      {product.image ? (
+        <img 
+          src={`/products/${product.image}`} 
+          alt={product.name}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          onError={(e) => {
+            // Fallback if image fails to load
+            (e.target as HTMLImageElement).style.display = 'none';
+            const fallback = (e.target as HTMLImageElement).nextElementSibling;
+            if (fallback) fallback.classList.remove('hidden');
+          }}
+        />
+      ) : null}
+
+      <div className={`relative text-center text-cream px-3 ${product.image ? 'hidden' : ''}`}>
         <div className="text-5xl drop-shadow-lg">{emoji}</div>
         <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: fg }}>
           Aryan Home
@@ -36,3 +52,4 @@ export function ProductImage({ product }: { product: Product }) {
     </div>
   );
 }
+

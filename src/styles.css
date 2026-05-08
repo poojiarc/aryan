@@ -142,7 +142,17 @@
   .shadow-soft { box-shadow: var(--shadow-soft); }
   .shadow-glow { box-shadow: var(--shadow-glow); }
 
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 15s linear infinite;
+  }
+
+
   /* Scroll reveal */
+
   .reveal {
     opacity: 0;
     transform: translateY(24px);

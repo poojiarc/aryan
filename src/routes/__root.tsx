@@ -4,11 +4,8 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
 
-import appCss from "../styles.css?url";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
@@ -58,37 +55,31 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aryan Home Foods — Authentic Homemade Indian Pickles, Snacks & Sweets in the UK" },
-      { name: "description", content: "Premium homemade Indian pickles, snacks, sweets, podis and ghee — handcrafted in the UK with no preservatives. UK-wide delivery from Bournemouth." },
-      { name: "author", content: "Aryan Home Foods" },
-      { property: "og:title", content: "Aryan Home Foods — Authentic Homemade Indian Flavours in the UK" },
-      { property: "og:description", content: "Made with love. Delivered fresh. Handcrafted Indian pickles, sweets & snacks." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "stylesheet", href: appCss }],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
 
-function RootShell({ children }: { children: React.ReactNode }) {
+function DiscountBanner() {
+  const content = (
+    <span className="flex items-center gap-20">
+      <span>🎁 Get <span className="underline decoration-forest-deep/30 decoration-2 underline-offset-2">5% OFF</span> on orders above £25 · Use code <strong className="rounded bg-forest-deep px-2 py-0.5 text-cream shadow-glow">ARYAN5</strong></span>
+      <span>🚚 <span className="font-bold">FREE SHIPPING</span> on all orders over £79!</span>
+      <span>🍯 Try our new <span className="font-bold text-forest-deep">Pure Buffalo Ghee</span> — Handcrafted with love</span>
+    </span>
+  );
+
   return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
+    <div className="gradient-gold py-2 overflow-hidden border-b border-forest-deep/10 shadow-sm relative z-[100]">
+      <div className="flex whitespace-nowrap animate-marquee">
+        <div className="flex shrink-0 items-center justify-around gap-20 px-10 text-xs font-bold text-forest-deep md:text-sm">
+          {content}
+          {content}
+          {content}
+          {content}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -98,7 +89,10 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <CartProvider>
         <div className="flex min-h-screen flex-col bg-background">
-          <Navbar />
+          <div className="sticky top-0 z-[100] shadow-soft">
+            <DiscountBanner />
+            <Navbar />
+          </div>
           <main className="flex-1">
             <Outlet />
           </main>
@@ -111,3 +105,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+

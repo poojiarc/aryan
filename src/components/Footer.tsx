@@ -51,7 +51,7 @@ export function Footer() {
 
         <div>
           <h4 className="font-display text-lg text-gold">Quick Links</h4>
-          <ul className="mt-4 space-y-2.5 text-sm text-cream/85">
+          <ul className="mt-4 space-y-1 text-sm text-cream/85">
             {quickLinks.map(({ to, label, Icon }) => (
               <li key={to}>
                 <Link to={to} className="group flex items-center gap-3 hover:text-gold transition">
@@ -65,7 +65,7 @@ export function Footer() {
 
         <div>
           <h4 className="font-display text-lg text-gold">Services</h4>
-          <ul className="mt-4 space-y-2.5 text-sm text-cream/85">
+          <ul className="mt-4 space-y-1 text-sm text-cream/85">
             {servicesList.map(({ label, Icon }) => (
               <li key={label} className="flex items-center gap-3">
                 <IconTile><Icon className="h-3.5 w-3.5" /></IconTile>
@@ -77,7 +77,7 @@ export function Footer() {
 
         <div>
           <h4 className="font-display text-lg text-gold">Get in Touch</h4>
-          <ul className="mt-4 space-y-3 text-sm text-cream/85">
+          <ul className="mt-4 space-y-1 text-sm text-cream/85">
             <li className="flex items-center gap-3">
               <IconTile><Phone className="h-3.5 w-3.5" /></IconTile>
               <a href="tel:+447474140956">+44 74741 40956</a>
