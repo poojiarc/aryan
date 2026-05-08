@@ -17,7 +17,7 @@ export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
       { title: "Shop All Products — Aryan Home Foods" },
-      { name: "description", content: "Browse pickles, snacks, sweets, podis, masalas & ghee. UK-wide delivery, free over £79." },
+      { name: "description", content: "Browse pickles, snacks, sweets, podis, masalas & ghee. UK-wide delivery. Get 5% OFF on orders above £25 with code ARYAN5." },
       { property: "og:title", content: "Shop Aryan Home Foods" },
       { property: "og:description", content: "Authentic homemade Indian foods, delivered across the UK." },
     ],
@@ -55,9 +55,16 @@ function ProductsPage() {
             <button
               key={c.id}
               onClick={() => setActive(c.id)}
-              className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition ${active===c.id?"bg-forest text-cream":"border border-border text-forest hover:border-forest"}`}
+              className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition ${active === c.id ? "bg-forest text-cream" : "border border-border text-forest hover:border-forest"}`}
             >
-              <span className="mr-1.5">{c.emoji}</span>{c.label}
+              <div className="flex h-6 w-6 items-center justify-center overflow-hidden rounded-full bg-forest-deep/10">
+                {c.image ? (
+                  <img src={c.image} alt="" className="h-full w-full object-cover" />
+                ) : (
+                  <span className="text-xs">{c.emoji}</span>
+                )}
+              </div>
+              {c.label}
             </button>
           ))}
         </div>

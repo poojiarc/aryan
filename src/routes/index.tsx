@@ -1,8 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  ShoppingBag, Users, Truck, Sparkles, Leaf, Heart, ChefHat,
-  Phone, Mail, MapPin, Package, Globe, ArrowRight,
+  ShoppingBag,
+  Users,
+  Truck,
+  Sparkles,
+  Heart,
+  ChefHat,
+  Phone,
+  Mail,
+  MapPin,
+  Package,
+  Globe,
+  ArrowRight,
+  CookingPot,
+  Salad,
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import hero1 from "@/assets/hero-1.jpg";
@@ -17,7 +29,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Aryan Home Foods — Homemade Indian Pickles, Snacks & Sweets | UK" },
-      { name: "description", content: "Authentic homemade Indian pickles, snacks, sweets, podis & ghee — handcrafted in the UK. Free shipping over £79." },
+      { name: "description", content: "Authentic homemade Indian pickles, snacks, sweets, podis & ghee — handcrafted in the UK. Get 5% OFF on orders above £25 with code ARYAN5." },
     ],
   }),
   component: HomePage,
@@ -49,7 +61,7 @@ function Hero() {
       <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-4 pb-20 md:px-6 md:pb-28">
         <div className="max-w-3xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-forest-deep/40 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold backdrop-blur">
-            <Sparkles className="h-3 w-3" /> Authentic · Homemade · UK-Made
+            <Sparkles className="h-3 w-3" /> Authentic . Homemade . Pickles &. Snacks.
           </span>
           <h1 className="mt-5 font-display text-4xl leading-[1.05] text-cream md:text-6xl lg:text-7xl">
             {slides[i].title}
@@ -91,7 +103,7 @@ function ShippingBanner() {
   return (
     <section className="bg-forest text-cream">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-4 py-3 text-sm md:px-6">
-        <span className="flex items-center gap-2"><Truck className="h-4 w-4 text-gold" /> Free shipping on orders above <strong>£79</strong></span>
+        <span className="flex items-center gap-2 text-gold font-bold uppercase tracking-wider"><Sparkles className="h-4 w-4" /> Get 5% OFF on orders above £25 · Use code ARYAN5</span>
         <span className="hidden md:flex items-center gap-2"><Globe className="h-4 w-4 text-gold" /> UK-wide & International</span>
         <span className="flex items-center gap-2"><Package className="h-4 w-4 text-gold" /> Fresh, small-batch packing</span>
       </div>
@@ -99,7 +111,7 @@ function ShippingBanner() {
   );
 }
 
-function Categories() {
+function Categories({ onSelect }: { onSelect: (id: Category) => void }) {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
       <div className="reveal text-center">
@@ -111,21 +123,27 @@ function Categories() {
       </div>
       <div className="mt-12 grid grid-cols-3 gap-5 sm:grid-cols-4 md:grid-cols-7">
         {CATEGORIES.map((c, idx) => (
-          <Link
+          <button
             key={c.id}
-            to="/products"
-            search={{ category: c.id }}
+            onClick={() => {
+              onSelect(c.id);
+              document.getElementById("product-catalog")?.scrollIntoView({ behavior: "smooth" });
+            }}
             className={`reveal reveal-delay-${(idx % 3) + 1} group flex flex-col items-center gap-2 text-center`}
           >
-            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-forest-deep text-4xl shadow-soft transition-all duration-300 group-hover:bg-forest group-hover:shadow-glow group-hover:-translate-y-1 md:h-28 md:w-28">
-              <span className="absolute inset-0 rounded-full ring-4 ring-gold/20 ring-offset-4 ring-offset-cream opacity-0 group-hover:opacity-100 transition-all duration-300" />
-              {c.emoji}
+            <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-forest-deep text-4xl shadow-soft transition-all duration-300 group-hover:bg-forest group-hover:shadow-glow group-hover:-translate-y-1 md:h-28 md:w-28">
+              <span className="absolute inset-0 z-10 rounded-full ring-4 ring-gold/20 ring-offset-4 ring-offset-cream opacity-0 group-hover:opacity-100 transition-all duration-300" />
+              {c.image ? (
+                <img src={c.image} alt={c.label} className="h-full w-full object-cover transition duration-500 group-hover:scale-110" />
+              ) : (
+                c.emoji
+              )}
             </div>
             <div className="flex flex-col gap-0.5">
               <div className="text-sm font-bold text-forest leading-tight">{c.label}</div>
               <div className="text-[10px] text-muted-foreground leading-tight">{c.blurb}</div>
             </div>
-          </Link>
+          </button>
         ))}
       </div>
 
@@ -134,28 +152,67 @@ function Categories() {
 }
 
 function About() {
+  const highlights = [
+    {
+      icon: (
+        <CookingPot
+          className="h-10 w-10 md:h-12 md:w-12"
+          strokeWidth={1.6}
+        />
+      ),
+      title: "100% Homemade",
+      desc: "Made in tiny batches in our Bournemouth kitchen."
+    },
+    {
+      icon: (
+        <Sparkles
+          className="h-10 w-10 md:h-12 md:w-12"
+          strokeWidth={1.6}
+        />
+      ),
+      title: "No Added Preservatives",
+      desc: "Zero preservatives, zero artificial colours or flavours."
+    },
+    {
+      icon: (
+        <Salad
+          className="h-10 w-10 md:h-12 md:w-12"
+          strokeWidth={1.6}
+        />
+      ),
+      title: "Authentic Recipes",
+      desc: "Traditional Andhra & Telugu recipes refined over generations."
+    }
+  ];
+
   return (
-    <section className="bg-cream/60">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 md:grid-cols-2 md:px-6 md:py-28">
-        <div className="reveal relative">
-          <div className="absolute -inset-4 rounded-3xl gradient-gold opacity-30 blur-2xl" />
-          <img src={about} alt="Hand-making pickles" loading="lazy" className="relative h-[480px] w-full rounded-3xl object-cover shadow-glow" />
-        </div>
-        <div className="reveal reveal-delay-1">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Our Story</p>
-          <h2 className="mt-2 font-display text-3xl text-forest md:text-5xl">Recipes Passed Down, Made With Love</h2>
-          <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-            Aryan Home Foods began in a Bournemouth kitchen with one promise — bring the soul of South Indian
-            cooking to homes across the UK. Every jar of pickle, every laddu, every podi is made in tiny batches,
-            using family recipes refined over generations.
+    <section className="relative overflow-hidden bg-forest py-20 md:py-32">
+      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #d4a437 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+      <div className="relative mx-auto max-w-5xl px-4 text-center md:px-6">
+        <div className="reveal">
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-gold">Our Story</p>
+          <h2 className="mt-4 font-display text-4xl text-cream md:text-6xl">Recipes Passed Down, Made With Love</h2>
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-cream/80">
+            Aryan Home Foods began with one promise — bring the soul of South Indian cooking to homes across the UK.
+            Every jar is a labor of love, sun-cured and spiced according to old-world traditions.
           </p>
-          <ul className="mt-6 space-y-3 text-sm text-forest">
-            <li className="flex items-start gap-3"><Leaf className="mt-0.5 h-4 w-4 text-gold" /> 100% homemade in small batches — never mass-produced</li>
-            <li className="flex items-start gap-3"><Sparkles className="mt-0.5 h-4 w-4 text-gold" /> Zero preservatives, zero artificial colours</li>
-            <li className="flex items-start gap-3"><ChefHat className="mt-0.5 h-4 w-4 text-gold" /> Traditional Andhra, Telugu & North Indian recipes</li>
-          </ul>
-          <Link to="/about" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-forest hover:text-gold">
-            Read our story <ArrowRight className="h-4 w-4" />
+        </div>
+
+        <div className="mt-16 grid gap-8 sm:grid-cols-3">
+          {highlights.map((h, i) => (
+            <div key={h.title} className={`reveal reveal-delay-${i + 1} flex flex-col items-center p-6 text-center group`}>
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-cream/5 text-gold transition-all duration-500 group-hover:bg-gold group-hover:text-forest">
+                {h.icon}
+              </div>
+              <h3 className="font-display text-xl text-cream md:text-2xl">{h.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-cream/60">{h.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="reveal mt-16">
+          <Link to="/about" className="inline-flex items-center gap-3 rounded-full border-2 border-gold/40 px-8 py-4 text-sm font-bold text-gold transition-all hover:bg-gold hover:text-forest">
+            Read Our Full Journey <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
@@ -181,12 +238,12 @@ function Services() {
       </div>
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s, i) => (
-          <div key={s.title} className={`reveal reveal-delay-${(i % 3) + 1} group rounded-3xl border border-border bg-card p-7 shadow-soft transition hover:-translate-y-1 hover:shadow-glow`}>
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl gradient-forest text-cream shadow-soft transition group-hover:gradient-gold group-hover:text-forest-deep">
-              <s.Icon className="h-6 w-6" />
+          <div key={s.title} className={`reveal reveal-delay-${(i % 3) + 1} group rounded-[2.5rem] border border-border bg-card p-8 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-glow`}>
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-forest/5 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-forest">
+              <s.Icon className="h-8 w-8" strokeWidth={1.2} />
             </div>
-            <h3 className="mt-5 font-display text-xl text-forest">{s.title}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+            <h3 className="mt-6 font-display text-2xl text-forest">{s.title}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
           </div>
         ))}
       </div>
@@ -194,26 +251,77 @@ function Services() {
   );
 }
 
-function Featured() {
-  const featured = PRODUCTS.filter((p) => ["mango", "chicken", "kara-boondi", "dryfruit-laddoos", "garam", "buffalo-ghee", "gongura", "murukulu"].includes(p.id));
+function ProductCatalog({ active, setActive }: { active: Category | "all", setActive: (val: Category | "all") => void }) {
+  const filteredCategories = active === "all" ? CATEGORIES : CATEGORIES.filter(c => c.id === active);
+
   return (
-    <section className="bg-cream/60">
-      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-        <div className="reveal flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Bestsellers</p>
-            <h2 className="mt-2 font-display text-3xl text-forest md:text-5xl">Featured Favourites</h2>
-          </div>
-          <Link to="/products" className="inline-flex items-center gap-2 rounded-full border-2 border-forest px-5 py-2.5 text-sm font-semibold text-forest hover:bg-forest hover:text-cream transition">
-            View All Products <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {featured.map((p, i) => (
-            <div key={p.id} className={`reveal reveal-delay-${(i % 3) + 1}`}>
-              <ProductCard product={p} />
-            </div>
+    <section id="product-catalog" className="bg-cream/60">
+      <div className="sticky top-[68px] z-20 border-b border-border bg-cream/85 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 py-3 md:px-6">
+          <button
+            onClick={() => setActive("all")}
+            className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition ${active === "all" ? "bg-forest text-cream" : "border border-border text-forest hover:border-forest"}`}
+          >
+            All
+          </button>
+          {CATEGORIES.map((c) => (
+            <button
+              key={c.id}
+              onClick={() => setActive(c.id)}
+              className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition ${active === c.id ? "bg-forest text-cream" : "border border-border text-forest hover:border-forest"}`}
+            >
+              <div className="flex h-6 w-6 items-center justify-center overflow-hidden rounded-full bg-forest-deep/10">
+                {c.image ? (
+                  <img src={c.image} alt="" className="h-full w-full object-cover" />
+                ) : (
+                  <span className="text-xs">{c.emoji}</span>
+                )}
+              </div>
+              {c.label}
+            </button>
           ))}
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-20">
+        <div className="reveal text-center mb-16">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Our Shop</p>
+          <h2 className="mt-2 font-display text-3xl text-forest md:text-5xl">Explore Our Collection</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            From spicy sun-cured pickles to handcrafted festive sweets — discover the authentic taste of homemade goodness.
+          </p>
+        </div>
+
+        <div className="space-y-20">
+          {filteredCategories.map((cat) => {
+            const items = PRODUCTS.filter((p) => p.category === cat.id);
+            if (items.length === 0) return null;
+            return (
+              <div key={cat.id} className="reveal">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-px flex-1 bg-gold/30" />
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-forest text-xl shadow-soft">
+                      {cat.image ? (
+                        <img src={cat.image} alt="" className="h-full w-full object-cover" />
+                      ) : (
+                        <span>{cat.emoji}</span>
+                      )}
+                    </div>
+                    <h3 className="font-display text-2xl text-forest md:text-3xl">{cat.label}</h3>
+                  </div>
+                  <div className="h-px flex-1 bg-gold/30" />
+                </div>
+                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                  {items.map((p, i) => (
+                    <div key={p.id} className={`reveal reveal-delay-${(i % 3) + 1}`}>
+                      <ProductCard product={p} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -250,19 +358,51 @@ function WhatsAppCTA() {
 
 function Highlights() {
   const items = [
-    { icon: "🌿", t: "100% Homemade" },
-    { icon: "🚫", t: "No Added Preservatives" },
-    { icon: "🏡", t: "Authentic Recipes" },
-    { icon: "❤️", t: "Made With Love" },
+    {
+      icon: (
+        <CookingPot
+          className="h-10 w-10 text-gold md:h-12 md:w-12"
+          strokeWidth={1.6}
+        />
+      ),
+      t: "100% Homemade"
+    },
+    {
+      icon: (
+        <Sparkles
+          className="h-10 w-10 text-gold md:h-12 md:w-12"
+          strokeWidth={1.6}
+        />
+      ),
+      t: "No Added Preservatives"
+    },
+    {
+      icon: (
+        <Salad
+          className="h-10 w-10 text-gold md:h-12 md:w-12"
+          strokeWidth={1.6}
+        />
+      ),
+      t: "Authentic Recipes"
+    },
+    {
+      icon: (
+        <Heart
+          className="h-10 w-10 text-gold md:h-12 md:w-12"
+          strokeWidth={1.6}
+        />
+      ),
+      t: "Made With Love"
+    },
   ];
   return (
     <section className="mx-auto max-w-7xl px-4 pb-16 md:px-6">
-      <div className="reveal relative overflow-hidden rounded-2xl gradient-forest px-4 py-6 md:px-10 md:py-8 shadow-soft border border-gold/40">
-        <div className="grid grid-cols-2 divide-x divide-gold/30 md:grid-cols-4">
+      <div className="reveal relative overflow-hidden rounded-[2.5rem] gradient-forest px-4 py-10 md:px-10 md:py-12 shadow-glow border border-gold/40">
+        <div className="grid grid-cols-2 divide-gold/20 md:grid-cols-4 md:divide-x">
           {items.map((it) => (
-            <div key={it.t} className="flex flex-col items-center justify-center gap-2 px-3 py-3 text-center">
-              <div className="text-3xl md:text-4xl">{it.icon}</div>
-              <div className="text-[11px] md:text-sm font-semibold uppercase tracking-wider text-gold">{it.t}</div>
+            <div key={it.t} className="flex flex-col items-center justify-center gap-4 px-3 py-4 text-center">
+              <div className="text-gold">{it.icon}</div>
+              <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-gold leading-tight">{it.t}</div>
             </div>
           ))}
         </div>
@@ -308,7 +448,7 @@ function ContactStrip() {
           <p className="mt-2 text-sm text-muted-foreground">Collect your fresh order from</p>
           <div className="mt-6">
             <p className="text-base font-semibold text-forest leading-relaxed">
-              London · Cambridge · <br/>Bournemouth · Coventry
+              London · Cambridge · <br />Bournemouth · Coventry
             </p>
           </div>
         </div>
@@ -320,15 +460,17 @@ function ContactStrip() {
 
 function HomePage() {
   useReveal();
+  const [active, setActive] = useState<Category | "all">("all");
+
   return (
     <>
       <Hero />
 
       <ShippingBanner />
-      <Categories />
+      <Categories onSelect={setActive} />
       <About />
       <Services />
-      <Featured />
+      <ProductCatalog active={active} setActive={setActive} />
       <WhatsAppCTA />
       <Highlights />
       <ContactStrip />

@@ -19,14 +19,14 @@ export interface Product {
   description?: string;
 }
 
-export const CATEGORIES: { id: Category; label: string; emoji: string; blurb: string }[] = [
-  { id: "veg-pickles", label: "Veg Pickles", emoji: "🥭", blurb: "Sun-cured & spice-rich" },
-  { id: "non-veg-pickles", label: "Non-Veg Pickles", emoji: "🍗", blurb: "Slow-cooked, bold heat" },
-  { id: "snacks", label: "Snacks", emoji: "🥨", blurb: "Crunchy & moreish" },
-  { id: "sweets", label: "Sweets", emoji: "🍬", blurb: "Festive & handcrafted" },
-  { id: "powders", label: "Powders", emoji: "🌶️", blurb: "Stone-ground podis" },
-  { id: "masalas", label: "Masalas", emoji: "🧂", blurb: "Family spice blends" },
-  { id: "ghee", label: "Homemade Ghee", emoji: "🧈", blurb: "Pure buffalo ghee" },
+export const CATEGORIES: { id: Category; label: string; emoji: string; blurb: string; image?: string }[] = [
+  { id: "veg-pickles", label: "Veg Pickles", emoji: "🥭", blurb: "Sun-cured & spice-rich", image: "/products/mango.png" },
+  { id: "non-veg-pickles", label: "Non-Veg Pickles", emoji: "🍗", blurb: "Slow-cooked, bold heat", image: "/products/nonvegpickle.png" },
+  { id: "snacks", label: "Snacks", emoji: "🥨", blurb: "Crunchy & moreish", image: "/products/snacks.png" },
+  { id: "sweets", label: "Sweets", emoji: "🍬", blurb: "Festive & handcrafted", image: "/products/sweets.png" },
+  { id: "powders", label: "Powders", emoji: "🌶️", blurb: "Stone-ground podis", image: "/products/powders.png" },
+  { id: "masalas", label: "Masalas", emoji: "🧂", blurb: "Family spice blends", image: "/products/masalas.png" },
+  { id: "ghee", label: "Homemade Ghee", emoji: "🧈", blurb: "Pure buffalo ghee", image: "/products/ghee.png" },
 ];
 
 const pVeg = (id: string, name: string, image: string): Product => ({
