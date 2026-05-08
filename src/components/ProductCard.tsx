@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
 import type { Product, WeightOption } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductImage } from "./ProductImage";
@@ -10,7 +9,6 @@ export function ProductCard({ product }: { product: Product }) {
   const weights = Object.keys(product.prices) as WeightOption[];
   const [weight, setWeight] = useState<WeightOption>(weights[0]);
   const { add } = useCart();
-  const navigate = useNavigate();
   const price = product.prices[weight] ?? 0;
 
   const preBook = () => {
@@ -72,8 +70,6 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </div>
       </div>
-      {/* navigate hidden if needed */}
-      <span className="hidden">{navigate ? "" : ""}</span>
     </article>
   );
 }
