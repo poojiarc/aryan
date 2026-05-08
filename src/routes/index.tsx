@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  ShoppingBag, Users, Truck, Sparkles, Leaf, Heart, ChefHat, MessageCircle,
+  ShoppingBag, Users, Truck, Sparkles, Leaf, Heart, ChefHat,
   Phone, Mail, MapPin, Package, Globe, ArrowRight,
 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
@@ -174,7 +175,7 @@ const services = [
   { Icon: Sparkles, title: "Traditional Snacks", desc: "Crisp, crunchy & deeply nostalgic." },
   { Icon: Heart, title: "Authentic Sweets", desc: "Festive mithai, made by hand." },
   { Icon: Package, title: "Custom & Bulk Orders", desc: "Weddings, parties & festivals." },
-  { Icon: MessageCircle, title: "WhatsApp Ordering", desc: "Chat with us — we deliver fast." },
+  { Icon: WhatsAppIcon, title: "WhatsApp Ordering", desc: "Chat with us — we deliver fast." },
   { Icon: Globe, title: "UK & International Delivery", desc: "From Bournemouth, worldwide." },
 ];
 
@@ -246,7 +247,7 @@ function WhatsAppCTA() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-7 py-4 text-base font-semibold text-white shadow-glow hover:scale-105 transition"
           >
-            <MessageCircle className="h-5 w-5" /> Join the Group
+            <WhatsAppIcon className="h-5 w-5" /> Join the Group
           </a>
         </div>
       </div>
