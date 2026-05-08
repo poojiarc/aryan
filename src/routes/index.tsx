@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  ShoppingBag, Users, Truck, Sparkles, Leaf, Heart, ChefHat, MessageCircle,
+  ShoppingBag, Users, Truck, Sparkles, Leaf, Heart, ChefHat,
   Phone, Mail, MapPin, Package, Globe, ArrowRight,
 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
