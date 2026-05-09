@@ -15,7 +15,13 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
+
+    // ✅ ADD THIS
+    allowedHosts: [
+      "timmy-semimature-unpoisonously.ngrok-free.dev"
+    ]
   },
+
   build: {
     outDir: "dist",
   }

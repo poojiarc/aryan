@@ -74,7 +74,7 @@ function ProductsPage() {
         {list.length === 0 ? (
           <div className="text-center text-muted-foreground py-20">No products yet in this category.</div>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {list.map((p, i) => (
               <div key={p.id} className={`reveal reveal-delay-${(i%3)+1}`}>
                 <ProductCard product={p} />

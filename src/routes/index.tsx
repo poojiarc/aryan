@@ -285,7 +285,7 @@ function ProductCatalog({ active, setActive }: { active: Category | "all", setAc
                   </div>
                   <div className="h-px flex-1 bg-gold/30" />
                 </div>
-                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-2 gap-3 sm:gap-5 sm:grid-cols-2 lg:grid-cols-4">
                   {items.map((p, i) => (
                     <div key={p.id} className={`reveal reveal-delay-${(i % 3) + 1}`}>
                       <ProductCard product={p} />
