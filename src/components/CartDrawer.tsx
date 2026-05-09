@@ -16,7 +16,9 @@ const checkoutSchema = z.object({
     .string()
     .trim()
     .regex(/^[0-9+()\-\s]{10,16}$/, "Enter a valid phone number"),
-  address: z.string().trim().min(10, "Enter your delivery address").max(240, "Address is too long"),
+  address: z.string().optional(),
+  deliveryMethod: z.enum(["home", "collection"]),
+  collectionPoint: z.string().optional(),
 });
 
 type CheckoutValues = z.infer<typeof checkoutSchema>;
@@ -27,7 +29,9 @@ export function CartDrawer() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [errors, setErrors] = useState<CheckoutErrors>({});
+  const [deliveryMethod, setDeliveryMethod] = useState<"home" | "collection">("home");
+  const [collectionPoint, setCollectionPoint] = useState("");
+  const [errors, setErrors] = useState<CheckoutErrors & { deliveryMethod?: string; collectionPoint?: string }>({});
 
   const itemCount = useMemo(() => count, [count]);
 
@@ -41,27 +45,45 @@ export function CartDrawer() {
 
   const checkout = () => {
     if (lines.length === 0) return;
-    const parsed = checkoutSchema.safeParse({ name, phone, address });
+
+    // Manual validation for conditional fields
+    if (deliveryMethod === "home" && (!address || address.trim().length < 10)) {
+      setErrors((prev) => ({ ...prev, address: "Enter your full delivery address" }));
+      toast.error("Please enter your delivery address.");
+      return;
+    }
+    if (deliveryMethod === "collection" && !collectionPoint) {
+      setErrors((prev) => ({ ...prev, collectionPoint: "Select a collection point" }));
+      toast.error("Please select a collection point.");
+      return;
+    }
+
+    const parsed = checkoutSchema.safeParse({ name, phone, address, deliveryMethod, collectionPoint });
     if (!parsed.success) {
-      const next: CheckoutErrors = {};
+      const next: any = {};
       for (const issue of parsed.error.issues) {
-        const f = issue.path[0] as keyof CheckoutValues;
+        const f = issue.path[0] as string;
         if (!next[f]) next[f] = issue.message;
       }
       setErrors(next);
-      toast.error("Please complete your delivery details.");
+      toast.error("Please complete your contact details.");
       return;
     }
     const v = parsed.data;
     const itemLines = lines.map(
       (l, i) => `${i + 1}. ${l.product.name} (${l.weight}) × ${l.qty} = £${(l.price * l.qty).toFixed(2)}`,
     );
+
+    const deliveryInfo = v.deliveryMethod === "home"
+      ? `📍 Address: ${v.address}`
+      : `🏪 Collection Point: ${v.collectionPoint}`;
+
     const msg =
       `*New Order — Aryan Home Foods*\n\n` +
       `*Customer Details*\n` +
       `👤 Name: ${v.name}\n` +
       `📞 Phone: ${v.phone}\n` +
-      `📍 Address: ${v.address}\n\n` +
+      `${deliveryInfo}\n\n` +
       `*Order*\n` +
       itemLines.join("\n") +
       `\n\n*Total: £${total.toFixed(2)}*\n\nPlease confirm availability and delivery.`;
@@ -218,44 +240,95 @@ export function CartDrawer() {
                         {errors.phone && <p className="mt-1 text-[11px] text-destructive">{errors.phone}</p>}
                       </label>
 
-                      <label className="block">
-                        <span className="text-xs font-medium text-forest">Delivery address</span>
-                        <div className="relative mt-1">
-                          <MapPin className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                          <Textarea
-                            value={address}
-                            onChange={(e) => {
-                              setAddress(e.target.value);
-                              if (errors.address) validateField("address", e.target.value);
+                      <div className="space-y-2">
+                        <span className="text-xs font-medium text-forest">Delivery Method</span>
+                        <div className="grid grid-cols-2 gap-3">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setDeliveryMethod("home");
+                              setErrors((prev) => ({ ...prev, address: undefined, collectionPoint: undefined }));
                             }}
-                            onBlur={(e) => validateField("address", e.target.value)}
-                            placeholder="House / street / area / postcode"
-                            rows={3}
-                            maxLength={240}
-                            className="min-h-[88px] resize-none rounded-xl pl-9"
-                            aria-invalid={Boolean(errors.address)}
-                          />
+                            className={`flex items-center gap-3 rounded-xl border p-3 transition ${deliveryMethod === "home" ? "border-forest bg-forest/5 shadow-sm" : "border-border bg-background hover:border-forest/50"}`}
+                          >
+                            <div className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ${deliveryMethod === "home" ? "border-forest" : "border-muted-foreground"}`}>
+                              {deliveryMethod === "home" && <div className="h-2 w-2 rounded-full bg-forest" />}
+                            </div>
+                            <span className="text-sm font-medium text-forest">Home Delivery</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setDeliveryMethod("collection");
+                              setErrors((prev) => ({ ...prev, address: undefined, collectionPoint: undefined }));
+                            }}
+                            className={`flex items-center gap-3 rounded-xl border p-3 transition ${deliveryMethod === "collection" ? "border-forest bg-forest/5 shadow-sm" : "border-border bg-background hover:border-forest/50"}`}
+                          >
+                            <div className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ${deliveryMethod === "collection" ? "border-forest" : "border-muted-foreground"}`}>
+                              {deliveryMethod === "collection" && <div className="h-2 w-2 rounded-full bg-forest" />}
+                            </div>
+                            <span className="text-sm font-medium text-forest">Collection</span>
+                          </button>
                         </div>
-                        <div className="mt-1 flex items-center justify-between gap-3">
-                          {errors.address ? (
-                            <p className="text-[11px] text-destructive">{errors.address}</p>
-                          ) : (
-                            <p className="text-[11px] text-muted-foreground">Add a complete address for faster confirmation.</p>
-                          )}
-                          <p className="text-[11px] text-muted-foreground">{address.length}/240</p>
+                      </div>
+
+                      {deliveryMethod === "home" ? (
+                        <label className="block">
+                          <span className="text-xs font-medium text-forest">Delivery address</span>
+                          <div className="relative mt-1">
+                            <MapPin className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                            <Textarea
+                              value={address}
+                              onChange={(e) => {
+                                setAddress(e.target.value);
+                                if (errors.address) validateField("address", e.target.value);
+                              }}
+                              onBlur={(e) => validateField("address", e.target.value)}
+                              placeholder="House / street / area / postcode"
+                              rows={3}
+                              maxLength={240}
+                              className="min-h-[88px] resize-none rounded-xl pl-9"
+                              aria-invalid={Boolean(errors.address)}
+                            />
+                          </div>
+                          <div className="mt-1 flex items-center justify-between gap-3">
+                            {errors.address ? (
+                              <p className="text-[11px] text-destructive">{errors.address}</p>
+                            ) : (
+                              <p className="text-[11px] text-muted-foreground">Add a complete address for faster confirmation.</p>
+                            )}
+                            <p className="text-[11px] text-muted-foreground">{address.length}/240</p>
+                          </div>
+                        </label>
+                      ) : (
+                        <div className="space-y-2">
+                          <span className="text-xs font-medium text-forest">Select Collection Point</span>
+                          <div className="grid grid-cols-2 gap-2">
+                            {["London", "Cambridge", "Bournemouth", "Coventry"].map((point) => (
+                              <button
+                                key={point}
+                                type="button"
+                                onClick={() => {
+                                  setCollectionPoint(point);
+                                  setErrors((prev) => ({ ...prev, collectionPoint: undefined }));
+                                }}
+                                className={`rounded-xl border px-3 py-2.5 text-sm font-medium transition ${collectionPoint === point ? "border-forest bg-forest text-cream shadow-sm" : "border-border bg-background text-forest hover:border-forest/50"}`}
+                              >
+                                {point}
+                              </button>
+                            ))}
+                          </div>
+                          {errors.collectionPoint && <p className="text-[11px] text-destructive">{errors.collectionPoint}</p>}
+                          <p className="text-[11px] text-muted-foreground italic">Collection points are for local pickups only.</p>
                         </div>
-                      </label>
+                      )}
                     </div>
 
                     <div className="mt-4 flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">Subtotal</span>
                       <span className="font-display text-2xl font-bold text-forest">£{total.toFixed(2)}</span>
                     </div>
-                    {total < 79 && (
-                      <div className="mt-2 rounded-lg bg-gold/15 px-3 py-2 text-xs text-forest">
-                        Add £{(79 - total).toFixed(2)} more for <strong>FREE shipping</strong>
-                      </div>
-                    )}
+
                     <p className="mt-2 text-[11px] text-muted-foreground">
                       Your details & order are sent directly via WhatsApp for confirmation.
                     </p>

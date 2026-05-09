@@ -57,7 +57,7 @@ function AboutPage() {
 
           <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-cream/80">
             Aryan Home Foods is a small family-run brand bringing authentic,
-            homemade Indian flavours to families across the UK. Every jar is a
+            homemade Indian flavours to you. Every jar is a
             labor of love, sun-cured and spiced according to old-world
             traditions.
           </p>

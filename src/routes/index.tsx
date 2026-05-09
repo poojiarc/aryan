@@ -6,7 +6,6 @@ import {
   Truck,
   Sparkles,
   Heart,
-  ChefHat,
   Phone,
   Mail,
   MapPin,
@@ -20,6 +19,8 @@ import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
+import hero4 from "@/assets/hero-4.jpg";
+import hero5 from "@/assets/hero-5.jpg";
 import about from "@/assets/about.jpg";
 import { CATEGORIES, PRODUCTS, WHATSAPP_GROUP, WHATSAPP_DIRECT } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
@@ -29,16 +30,18 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Aryan Home Foods — Homemade Indian Pickles, Snacks & Sweets | UK" },
-      { name: "description", content: "Authentic homemade Indian pickles, snacks, sweets, podis & ghee — handcrafted in the UK. Get 5% OFF on orders above £25 with code ARYAN5." },
+      { name: "description", content: "Authentic homemade Indian pickles, snacks, sweets, and podis — handcrafted in the UK. Get 5% OFF on orders above £25 with code ARYAN5." },
     ],
   }),
   component: HomePage,
 });
 
 const slides = [
-  { img: hero1, title: "Authentic Homemade Indian Flavours", sub: "Hand-crafted pickles & snacks, delivered across the UK" },
+  { img: hero1, title: "Authentic Homemade Indian Flavours", sub: "Hand-crafted pickles & snacks, made fresh for you" },
   { img: hero3, title: "Sun-Cured Pickles, Old-World Recipes", sub: "Small batches. No preservatives. Pure tradition." },
   { img: hero2, title: "Festive Sweets, Made With Love", sub: "Pre-book artisan mithai for every occasion" },
+  { img: hero4, title: "Traditional Podis & Masalas", sub: "Stone-ground and packed with flavour" },
+  { img: hero5, title: "Pure Ingredients, Pure Taste", sub: "Handcrafted goodness delivered to your doorstep" },
 ];
 
 function Hero() {
@@ -104,7 +107,6 @@ function ShippingBanner() {
     <section className="bg-forest text-cream">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-4 py-3 text-sm md:px-6">
         <span className="flex items-center gap-2 text-gold font-bold uppercase tracking-wider"><Sparkles className="h-4 w-4" /> Get 5% OFF on orders above £25 · Use code ARYAN5</span>
-        <span className="hidden md:flex items-center gap-2"><Globe className="h-4 w-4 text-gold" /> UK-wide & International</span>
         <span className="flex items-center gap-2"><Package className="h-4 w-4 text-gold" /> Fresh, small-batch packing</span>
       </div>
     </section>
@@ -193,7 +195,7 @@ function About() {
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-gold">Our Story</p>
           <h2 className="mt-4 font-display text-4xl text-cream md:text-6xl">Recipes Passed Down, Made With Love</h2>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-cream/80">
-            Aryan Home Foods began with one promise — bring the soul of South Indian cooking to homes across the UK.
+            Aryan Home Foods began with one promise — bring the soul of South Indian cooking to your home.
             Every jar is a labor of love, sun-cured and spiced according to old-world traditions.
           </p>
         </div>
@@ -220,36 +222,7 @@ function About() {
   );
 }
 
-const services = [
-  { Icon: ChefHat, title: "Handcrafted Pickles", desc: "Sun-cured, spice-rich, jarred fresh." },
-  { Icon: Sparkles, title: "Traditional Snacks", desc: "Crisp, crunchy & deeply nostalgic." },
-  { Icon: Heart, title: "Authentic Sweets", desc: "Festive mithai, made by hand." },
-  { Icon: Package, title: "Custom & Bulk Orders", desc: "Weddings, parties & festivals." },
-  { Icon: WhatsAppIcon, title: "WhatsApp Ordering", desc: "Chat with us — we deliver fast." },
-  { Icon: Globe, title: "UK & International Delivery", desc: "From Bournemouth, worldwide." },
-];
 
-function Services() {
-  return (
-    <section className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-      <div className="reveal text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">What We Offer</p>
-        <h2 className="mt-2 font-display text-3xl text-forest md:text-5xl">Everything Made With Care</h2>
-      </div>
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((s, i) => (
-          <div key={s.title} className={`reveal reveal-delay-${(i % 3) + 1} group rounded-[2.5rem] border border-border bg-card p-8 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-glow`}>
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-forest/5 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-forest">
-              <s.Icon className="h-8 w-8" strokeWidth={1.2} />
-            </div>
-            <h3 className="mt-6 font-display text-2xl text-forest">{s.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 function ProductCatalog({ active, setActive }: { active: Category | "all", setActive: (val: Category | "all") => void }) {
   const filteredCategories = active === "all" ? CATEGORIES : CATEGORIES.filter(c => c.id === active);
@@ -469,7 +442,7 @@ function HomePage() {
       <ShippingBanner />
       <Categories onSelect={setActive} />
       <About />
-      <Services />
+
       <ProductCatalog active={active} setActive={setActive} />
       <WhatsAppCTA />
       <Highlights />

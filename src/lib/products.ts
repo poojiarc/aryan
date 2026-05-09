@@ -4,8 +4,7 @@ export type Category =
   | "snacks"
   | "sweets"
   | "powders"
-  | "masalas"
-  | "ghee";
+  | "masalas";
 
 export type WeightOption = "250g" | "500g" | "1000g";
 
@@ -20,13 +19,12 @@ export interface Product {
 }
 
 export const CATEGORIES: { id: Category; label: string; emoji: string; blurb: string; image?: string }[] = [
-  { id: "veg-pickles", label: "Veg Pickles", emoji: "🥭", blurb: "Sun-cured & spice-rich", image: "/products/mango.png" },
-  { id: "non-veg-pickles", label: "Non-Veg Pickles", emoji: "🍗", blurb: "Slow-cooked, bold heat", image: "/products/nonvegpickle.png" },
-  { id: "snacks", label: "Snacks", emoji: "🥨", blurb: "Crunchy & moreish", image: "/products/snacks.png" },
-  { id: "sweets", label: "Sweets", emoji: "🍬", blurb: "Festive & handcrafted", image: "/products/sweets.png" },
-  { id: "powders", label: "Powders", emoji: "🌶️", blurb: "Stone-ground podis", image: "/products/powders.png" },
-  { id: "masalas", label: "Masalas", emoji: "🧂", blurb: "Family spice blends", image: "/products/masalas.png" },
-  { id: "ghee", label: "Homemade Ghee", emoji: "🧈", blurb: "Pure buffalo ghee", image: "/products/ghee.png" },
+  { id: "veg-pickles", label: "Mango Pickle", emoji: "🥭", blurb: "Sun-cured & spice-rich", image: "/products/mangopickle.jpg" },
+  { id: "non-veg-pickles", label: "Non-Veg Pickles", emoji: "🍗", blurb: "Slow-cooked, bold heat", image: "/products/prawnspickle.jpg" },
+  { id: "snacks", label: "Snacks", emoji: "🥨", blurb: "Crunchy & moreish", image: "/products/murukulu.jpg" },
+  { id: "sweets", label: "Sweets", emoji: "🍬", blurb: "Festive & handcrafted", image: "/products/madatakaja.jpg" },
+  { id: "powders", label: "Powders", emoji: "🌶️", blurb: "Stone-ground podis", image: "/products/karivepakukarampodi.jpg" },
+  { id: "masalas", label: "Masalas", emoji: "🧂", blurb: "Family spice blends", image: "/products/muttonmasala.jpg" },
 ];
 
 const pVeg = (id: string, name: string, image: string): Product => ({
@@ -38,7 +36,7 @@ const pNonVeg = (id: string, name: string, image: string, prices: Product["price
 });
 const pSnack = (id: string, name: string, image: string): Product => ({
   id, name, category: "snacks", image,
-  prices: { "500g": 6.49, "1000g": 11.99 },
+  prices: { "250g": 3.49, "500g": 6.49, "1000g": 11.99 },
 });
 const pPowder = (id: string, name: string, image: string): Product => ({
   id, name, category: "powders", image,
@@ -110,11 +108,6 @@ export const PRODUCTS: Product[] = [
   pSnack("banana-chips", "Banana Chips", "bananachips.jpg"),
   pSnack("ring-murukku", "Ring Murukku", "ringmurukku.jpg"),
 
-  // Ghee
-  {
-    id: "buffalo-ghee", name: "Buffalo Ghee", category: "ghee", image: "buffaloghee.jpg",
-    prices: { "250g": 4.79, "500g": 8.99, "1000g": 16.49 },
-  },
 ];
 
 export const WHATSAPP_GROUP = "https://chat.whatsapp.com/HoZoIzPCVaMBn6aU4dMdl5";

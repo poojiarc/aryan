@@ -8,7 +8,7 @@ import { useReveal } from "@/hooks/use-reveal";
 const search = z.object({
   category: z.enum([
     "veg-pickles", "non-veg-pickles", "snacks", "sweets",
-    "powders", "masalas", "ghee",
+    "powders", "masalas",
   ]).optional(),
 });
 
@@ -17,9 +17,9 @@ export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
       { title: "Shop All Products — Aryan Home Foods" },
-      { name: "description", content: "Browse pickles, snacks, sweets, podis, masalas & ghee. UK-wide delivery. Get 5% OFF on orders above £25 with code ARYAN5." },
+      { name: "description", content: "Browse pickles, snacks, sweets, podis, and masalas. Get 5% OFF on orders above £25 with code ARYAN5." },
       { property: "og:title", content: "Shop Aryan Home Foods" },
-      { property: "og:description", content: "Authentic homemade Indian foods, delivered across the UK." },
+      { property: "og:description", content: "Authentic homemade Indian foods." },
     ],
   }),
   component: ProductsPage,
@@ -38,7 +38,7 @@ function ProductsPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">Our Catalogue</p>
           <h1 className="mt-2 font-display text-4xl md:text-6xl">All Products</h1>
           <p className="mx-auto mt-3 max-w-xl text-cream/80">
-            Pick your favourites — fresh, homemade, and ready to ship across the UK.
+            Pick your favourites — fresh, homemade, and ready for you.
           </p>
         </div>
       </section>

@@ -15,7 +15,6 @@ const servicesList = [
   { label: "Traditional Snacks", Icon: Sparkles },
   { label: "Authentic Sweets", Icon: Heart },
   { label: "Custom & Bulk Orders", Icon: Package },
-  { label: "UK-wide Delivery", Icon: Globe },
 ];
 
 function IconTile({ children }: { children: React.ReactNode }) {
@@ -37,13 +36,13 @@ export function Footer() {
             <div className="font-display text-xl">Aryan Home Foods</div>
           </div>
           <p className="mt-4 text-sm text-cream/75 leading-relaxed">
-            Authentic homemade Indian pickles, snacks & sweets — made in small batches, delivered across the UK.
+            Authentic homemade Indian pickles, snacks & sweets — made in small batches, just for you.
           </p>
           <div className="mt-5 flex gap-3">
-            <a href="https://instagram.com/AryanHomemadefoods" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-xl bg-forest-deep/80 ring-1 ring-gold/30 hover:bg-gold hover:text-forest-deep transition" aria-label="Instagram">
+            <a href="https://www.instagram.com/aryanhomemadefoods?igsh=enhwOHpjeGF4b3Ns" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-xl bg-forest-deep/80 ring-1 ring-gold/30 hover:bg-gold hover:text-forest-deep transition" aria-label="Instagram">
               <Instagram className="h-4 w-4" />
             </a>
-            <a href="https://facebook.com/AryanHomemadefoods" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-xl bg-forest-deep/80 ring-1 ring-gold/30 hover:bg-gold hover:text-forest-deep transition" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/19jqRutWWn/" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-xl bg-forest-deep/80 ring-1 ring-gold/30 hover:bg-gold hover:text-forest-deep transition" aria-label="Facebook">
               <Facebook className="h-4 w-4" />
             </a>
           </div>

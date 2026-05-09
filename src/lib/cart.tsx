@@ -1,5 +1,6 @@
 import * as React from "react";
 import type { Product, WeightOption } from "./products";
+import { toast } from "sonner";
 
 export interface CartLine {
   id: string; // product.id + weight
@@ -40,7 +41,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...prev, { id, product, weight, qty: 1, price }];
     });
-    setOpen(true);
+    toast.success(`${product.name} added to cart`);
   };
 
   const remove: CartCtx["remove"] = (id) =>

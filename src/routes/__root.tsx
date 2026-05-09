@@ -65,7 +65,7 @@ function DiscountBanner() {
     <span className="flex items-center gap-20">
       <span>🎁 Get <span className="underline decoration-forest-deep/30 decoration-2 underline-offset-2">5% OFF</span> on orders above £25 · Use code <strong className="rounded bg-forest-deep px-2 py-0.5 text-cream shadow-glow">ARYAN5</strong></span>
       <span>🎁 <span className="font-bold">5% OFF</span> on orders over £25! Use code: <span className="font-bold">ARYAN5</span></span>
-      <span>🍯 Try our new <span className="font-bold text-forest-deep">Pure Buffalo Ghee</span> — Handcrafted with love</span>
+      <span>🍯 Try our new <span className="font-bold text-forest-deep">Handcrafted Podis</span> — Stone-ground with love</span>
     </span>
   );
 

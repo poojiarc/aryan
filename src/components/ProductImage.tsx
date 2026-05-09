@@ -7,7 +7,6 @@ const palette: Record<string, [string, string, string]> = {
   sweets: ["#c47028", "#fde7b1", "🍬"],
   powders: ["#8b1d1d", "#f3b35a", "🌶️"],
   masalas: ["#5a2a14", "#e3a857", "🧂"],
-  ghee: ["#b48227", "#fce7a8", "🧈"],
 };
 
 export function ProductImage({ product }: { product: Product }) {
