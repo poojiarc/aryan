@@ -94,25 +94,20 @@ export function Navbar() {
           open ? "max-h-96 border-t border-border" : "max-h-0"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
-          {links.map(({ to, label, Icon }) => (
-            <Link
-              key={to}
-              to={to}
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-forest/80 hover:bg-forest/5"
-              activeProps={{ className: "bg-forest text-cream" }}
-              activeOptions={{ exact: to === "/" }}
-            >
-              <Icon className="h-4 w-4" />
-              {label}
-            </Link>
-          ))}
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 items-center">
+          <Link
+            to="/products"
+            onClick={() => setOpen(false)}
+            className="w-full max-w-[280px] flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-4 text-sm font-bold text-cream shadow-soft"
+          >
+            <ShoppingBag className="h-4 w-4" />
+            Shop Now
+          </Link>
           <a
             href={WHATSAPP_GROUP}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-xl gradient-gold px-4 py-3 text-sm font-semibold text-forest-deep shadow-soft"
+            className="w-full max-w-[280px] flex items-center justify-center gap-2 rounded-full border-2 border-forest/20 px-6 py-4 text-sm font-semibold text-forest shadow-soft"
           >
             <Users className="h-4 w-4" />
             Join WhatsApp Group

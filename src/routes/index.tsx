@@ -87,28 +87,28 @@ function Hero() {
       <div className="absolute inset-0 z-10 flex items-center">
         <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
 
-          <div className="max-w-xl text-white">
+          <div className="mx-auto max-w-xl text-white text-center md:text-left md:mx-0">
 
             {/* TAG */}
-            <span className="inline-block mb-3 rounded-full bg-black/40 px-3 py-1 text-[10px] md:text-xs tracking-widest text-gold uppercase">
+            <span className="hidden md:inline-block mb-3 rounded-full bg-black/40 px-3 py-1 text-[10px] md:text-xs tracking-widest text-gold uppercase">
               AUTHENTIC · HOMEMADE · PICKLES & SNACKS
             </span>
 
             {/* TITLE */}
-            <h1 className="font-display text-4xl leading-tight md:text-5xl lg:text-6xl">
+            <h1 className="hidden md:block font-display text-4xl leading-tight md:text-5xl lg:text-6xl">
               {slides[i].title}
             </h1>
 
             {/* SUBTEXT */}
-            <p className="mt-3 text-base md:text-lg text-white/90">
+            <p className="hidden md:block mt-3 text-base md:text-lg text-white/90">
               {slides[i].sub}
             </p>
 
             {/* BUTTONS */}
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-0 md:mt-8 flex flex-row flex-wrap items-center justify-center md:justify-start gap-3 md:gap-4">
               <Link
                 to="/products"
-                className="rounded-full bg-cream px-6 py-3 text-sm font-bold text-forest shadow-lg hover:scale-105 transition"
+                className="rounded-full bg-cream px-5 py-2.5 text-[13px] font-bold text-forest shadow-lg hover:scale-105 transition md:px-6 md:py-3 md:text-sm"
               >
                 Shop Now
               </Link>
@@ -116,7 +116,7 @@ function Hero() {
               <a
                 href={WHATSAPP_GROUP}
                 target="_blank"
-                className="rounded-full border-2 border-white/80 px-6 py-3 text-sm font-semibold backdrop-blur-sm hover:bg-white/10 transition"
+                className="rounded-full border-2 border-white/80 px-4 py-2.5 text-[12px] font-semibold backdrop-blur-sm hover:bg-white/10 transition md:px-6 md:py-3 md:text-sm"
               >
                 Join WhatsApp Group
               </a>
