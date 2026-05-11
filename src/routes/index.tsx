@@ -21,6 +21,11 @@ import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
 import hero4 from "@/assets/hero-4.jpg";
 import hero5 from "@/assets/hero-5.jpg";
+import hero1Mob from "@/assets/hero-1-mobile.jpg";
+import hero2Mob from "@/assets/hero-2-mobile.jpg";
+import hero3Mob from "@/assets/hero-3-mobile.jpg";
+import hero4Mob from "@/assets/hero-4-mobile.jpg";
+import hero5Mob from "@/assets/hero-5-mobile.jpg";
 import about from "@/assets/about.jpg";
 import { CATEGORIES, PRODUCTS, WHATSAPP_GROUP, WHATSAPP_DIRECT } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
@@ -37,11 +42,11 @@ export const Route = createFileRoute("/")({
 });
 
 const slides = [
-  { img: hero1, title: "Authentic Homemade Indian Flavours", sub: "Hand-crafted pickles & snacks, made fresh for you" },
-  { img: hero3, title: "Sun-Cured Pickles, Old-World Recipes", sub: "Small batches. No preservatives. Pure tradition." },
-  { img: hero2, title: "Festive Sweets, Made With Love", sub: "Pre-book artisan mithai for every occasion" },
-  { img: hero4, title: "Traditional Podis & Masalas", sub: "Stone-ground and packed with flavour" },
-  { img: hero5, title: "Pure Ingredients, Pure Taste", sub: "Handcrafted goodness delivered to your doorstep" },
+  { img: hero1, mobileImg: hero1Mob, title: "Authentic Homemade Indian Flavours", sub: "Hand-crafted pickles & snacks, made fresh for you" },
+  { img: hero2, mobileImg: hero2Mob, title: "Festive Sweets, Made With Love", sub: "Pre-book artisan mithai for every occasion" },
+  { img: hero3, mobileImg: hero3Mob, title: "Traditional Homemade Pickles", sub: "Sun-cured & spice-rich pickles, made with love" },
+  { img: hero4, mobileImg: hero4Mob, title: "Crunchy & Moreish Snacks", sub: "Traditional murukulu and snacks for every craving" },
+  { img: hero5, mobileImg: hero5Mob, title: "Traditional Podis & Masalas", sub: "Stone-ground and packed with authentic flavour" },
 ];
 
 function Hero() {
@@ -63,25 +68,23 @@ function Hero() {
             className={`absolute inset-0 transition-opacity duration-1000 ${i === idx ? "opacity-100" : "opacity-0"
               }`}
           >
-            <img
-              src={s.img}
-              alt="hero"
-              className="
-                w-full h-full 
-                object-cover 
-                md:object-cover 
-                object-center
-              "
-            />
+            <picture>
+              <source media="(max-width: 768px)" srcSet={s.mobileImg} />
+              <img
+                src={s.img}
+                alt="hero"
+                className="w-full h-full object-cover object-center"
+              />
+            </picture>
 
-            {/* DARK OVERLAY */}
-            <div className="absolute inset-0 bg-black/50" />
+            {/* DARK OVERLAY - Only on desktop since mobile images are already styled */}
+            <div className="absolute inset-0 bg-black/40 md:bg-black/50 hidden md:block" />
           </div>
         ))}
       </div>
 
-      {/* CONTENT */}
-      <div className="absolute inset-0 z-10 flex items-center">
+      {/* CONTENT - Hidden on mobile because mobile images have text baked in */}
+      <div className="absolute inset-0 z-10 hidden md:flex items-center">
         <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
 
           <div className="max-w-xl text-white">
