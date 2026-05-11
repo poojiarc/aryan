@@ -71,7 +71,7 @@ function AboutPage() {
           </h2>
 
           <p>
-            Every product begins in our home kitchen in Bournemouth — using the
+            Every product begins in our  home kitchen in Andhra Pradesh — using the
             freshest ingredients, traditional techniques and recipes handed down
             through generations.
           </p>

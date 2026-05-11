@@ -19,12 +19,12 @@ export interface Product {
 }
 
 export const CATEGORIES: { id: Category; label: string; emoji: string; blurb: string; image?: string }[] = [
-  { id: "veg-pickles", label: "Mango Pickle", emoji: "🥭", blurb: "Sun-cured & spice-rich", image: "/products/mangopickle.jpg" },
+  { id: "veg-pickles", label: "Veg Pickle", emoji: "🥭", blurb: "Sun-cured & spice-rich", image: "/products/mangopickle.jpg" },
   { id: "non-veg-pickles", label: "Non-Veg Pickles", emoji: "🍗", blurb: "Slow-cooked, bold heat", image: "/products/prawnspickle.jpg" },
   { id: "snacks", label: "Snacks", emoji: "🥨", blurb: "Crunchy & moreish", image: "/products/murukulu.jpg" },
   { id: "sweets", label: "Sweets", emoji: "🍬", blurb: "Festive & handcrafted", image: "/products/madatakaja.jpg" },
   { id: "powders", label: "Powders", emoji: "🌶️", blurb: "Stone-ground podis", image: "/products/karivepakukarampodi.jpg" },
-  { id: "masalas", label: "Masalas", emoji: "🧂", blurb: "Family spice blends", image: "/products/muttonmasala.jpg" },
+  { id: "masalas", label: "Masalas", emoji: "🧂", blurb: "Family spice blends", image: "/products/redchillipowderforcurries.jpg" },
 ];
 
 const pVeg = (id: string, name: string, image: string): Product => ({
@@ -84,7 +84,7 @@ export const PRODUCTS: Product[] = [
   pSweet("dryfruit-puthareku", "Dry Fruit Putharekulu", "dryfruitputharekulu.jpg", 6.49, 11.99),
   pSweet("badusha", "Badusha", "badusha.jpg", 3.99, 7.99),
   pSweet("kakinada-kaja", "Kakinada Kaja", "kakinadakaja.jpg", 3.99, 7.99),
-  pSweet("sesame-chikki", "Sesame Chikki", "sesamechekki.jpg", 3.69, 7.29),
+  pSweet("sesame-chikki", "Sesame Chikki", "sesamechekki.jpg", 3.99, 7.99),
   pSweet("peanut-chikki", "Peanut Chikki", "peanutchikki.jpg", 3.69, 7.29),
   pSweet("kaju-chikki", "Kaju Chikki", "kajuchekki.jpg", 4.99, 9.49),
   pSweet("gujia", "Gujiya", "gujia.jpg", 3.99, 7.99),

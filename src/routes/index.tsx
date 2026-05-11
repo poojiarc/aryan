@@ -46,55 +46,91 @@ const slides = [
 
 function Hero() {
   const [i, setI] = useState(0);
+
   useEffect(() => {
-    const t = setInterval(() => setI((x) => (x + 1) % slides.length), 5500);
+    const t = setInterval(() => setI((x) => (x + 1) % slides.length), 5000);
     return () => clearInterval(t);
   }, []);
+
   return (
-    <section className="relative h-[88vh] min-h-[560px] w-full overflow-hidden">
-      {slides.map((s, idx) => (
-        <div
-          key={idx}
-          className={`absolute inset-0 transition-opacity duration-1000 ${i === idx ? "opacity-100" : "opacity-0"}`}
-        >
-          <img src={s.img} alt="" className="h-full w-full object-cover scale-105" />
-          <div className="absolute inset-0 gradient-overlay" />
-        </div>
-      ))}
-      <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-4 pb-20 md:px-6 md:pb-28">
-        <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-forest-deep/40 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold backdrop-blur">
-            <Sparkles className="h-3 w-3" /> Authentic . Homemade . Pickles &. Snacks.
-          </span>
-          <h1 className="mt-5 font-display text-4xl leading-[1.05] text-cream md:text-6xl lg:text-7xl">
-            {slides[i].title}
-          </h1>
-          <p className="mt-4 max-w-xl text-base text-cream/85 md:text-lg">{slides[i].sub}</p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link
-              to="/products"
-              className="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3.5 text-sm font-semibold text-forest shadow-glow hover:bg-gold transition"
-            >
-              <ShoppingBag className="h-4 w-4" /> Shop Now
-            </Link>
-            <a
-              href={WHATSAPP_GROUP}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-cream/70 px-6 py-3.5 text-sm font-semibold text-cream backdrop-blur hover:bg-cream hover:text-forest transition"
-            >
-              <Users className="h-4 w-4" /> Join WhatsApp Group
-            </a>
+    <section className="relative w-full overflow-hidden">
+
+      {/* IMAGE */}
+      <div className="relative w-full h-[70vh] md:h-[90vh]">
+        {slides.map((s, idx) => (
+          <div
+            key={idx}
+            className={`absolute inset-0 transition-opacity duration-1000 ${i === idx ? "opacity-100" : "opacity-0"
+              }`}
+          >
+            <img
+              src={s.img}
+              alt="hero"
+              className="
+                w-full h-full 
+                object-cover 
+                md:object-cover 
+                object-center
+              "
+            />
+
+            {/* DARK OVERLAY */}
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
+        ))}
+      </div>
+
+      {/* CONTENT */}
+      <div className="absolute inset-0 z-10 flex items-center">
+        <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+
+          <div className="max-w-xl text-white">
+
+            {/* TAG */}
+            <span className="inline-block mb-3 rounded-full bg-black/40 px-3 py-1 text-[10px] md:text-xs tracking-widest text-gold">
+              AUTHENTIC · HOMEMADE · PICKLES & SNACKS
+            </span>
+
+            {/* TITLE */}
+            <h1 className="font-display text-2xl leading-tight md:text-5xl lg:text-6xl">
+              {slides[i].title}
+            </h1>
+
+            {/* SUBTEXT */}
+            <p className="mt-3 text-sm md:text-lg text-white/90">
+              {slides[i].sub}
+            </p>
+
+            {/* BUTTONS */}
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link
+                to="/products"
+                className="rounded-full bg-cream px-5 py-2.5 text-sm font-semibold text-forest"
+              >
+                Shop Now
+              </Link>
+
+              <a
+                href={WHATSAPP_GROUP}
+                target="_blank"
+                className="rounded-full border border-white px-5 py-2.5 text-sm"
+              >
+                Join WhatsApp Group
+              </a>
+            </div>
+
           </div>
         </div>
       </div>
-      <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+
+      {/* DOTS */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {slides.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setI(idx)}
-            className={`h-1.5 rounded-full transition-all ${i === idx ? "w-10 bg-gold" : "w-2 bg-cream/50"}`}
-            aria-label={`Slide ${idx + 1}`}
+            className={`h-1.5 rounded-full ${i === idx ? "w-8 bg-gold" : "w-2 bg-white/50"
+              }`}
           />
         ))}
       </div>
@@ -107,7 +143,7 @@ function ShippingBanner() {
     <section className="bg-forest text-cream">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-4 py-3 text-sm md:px-6">
         <span className="flex items-center gap-2 text-gold font-bold uppercase tracking-wider"><Sparkles className="h-4 w-4" /> Get 5% OFF on orders above £25 · Use code ARYAN5</span>
-        <span className="flex items-center gap-2"><Package className="h-4 w-4 text-gold" /> Fresh, small-batch packing</span>
+        <span className="flex items-center gap-2"><Package className="h-4 w-4 text-gold" /> Free delivery on orders above 5 kg</span>
       </div>
     </section>
   );
@@ -163,7 +199,7 @@ function About() {
         />
       ),
       title: "100% Homemade",
-      desc: "Made in tiny batches in our Bournemouth kitchen."
+      desc: "Made in tiny batches in our Indian kitchen."
     },
     {
       icon: (

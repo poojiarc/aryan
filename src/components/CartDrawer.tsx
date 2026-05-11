@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Minus, Plus, Trash2, ShoppingCart, User, Phone, MapPin } from "lucide-react";
+import { X, Minus, Plus, Trash2, ShoppingCart, User, Phone, MapPin, Truck, CheckCircle2 } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { ProductImage } from "./ProductImage";
@@ -270,6 +270,28 @@ export function CartDrawer() {
                             <span className="text-sm font-medium text-forest">Collection</span>
                           </button>
                         </div>
+                        {deliveryMethod === "home" && (
+                          <div className="mt-3 space-y-1.5 text-xs text-forest">
+                            <div className="flex items-center gap-2">
+                              <Truck className="h-4 w-4 shrink-0 text-forest/80" strokeWidth={1.5} />
+                              <span>Delivery wihin 2 working days (DPD Express).</span>
+                            </div>
+                            <div className="flex items-start gap-2">
+                              <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5 text-forest/80" strokeWidth={1.5} />
+                              <div className="flex flex-col">
+                                <span>Charges (by weight):</span>
+                                <div className="mt-1 grid grid-cols-[3rem_1rem_3rem] gap-x-1 pl-4">
+                                  <span>0-1 kg</span><span>—</span><span>£6.49</span>
+                                  <span>1-2 kg</span><span>—</span><span>£6.99</span>
+                                  <span>2-3 kg</span><span>—</span><span>£7.49</span>
+                                  <span>3-4 kg</span><span>—</span><span>£7.99</span>
+                                  <span>4-5 kg</span><span>—</span><span>£8.49</span>
+                                </div>
+                                <span className="mt-1.5 font-semibold">Free delivery on orders above 5 kg</span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
 
                       {deliveryMethod === "home" ? (
