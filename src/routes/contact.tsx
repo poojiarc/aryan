@@ -48,7 +48,7 @@ function ContactPage() {
           <div className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 shadow-soft">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl gradient-gold text-forest-deep"><Phone className="h-5 w-5" /></div>
             <div>
-              <div className="text-sm font-semibold text-forest">Phone</div>
+              <div className="text-sm font-semibold text-forest">Phone(Ganesh)</div>
               <a href="tel:+447474140956" className="text-sm text-muted-foreground hover:text-forest">+44 74741 40956</a>
             </div>
           </div>

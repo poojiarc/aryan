@@ -77,38 +77,38 @@ function Hero() {
               />
             </picture>
 
-            {/* DARK OVERLAY - Only on desktop since mobile images are already styled */}
-            <div className="absolute inset-0 bg-black/40 md:bg-black/50 hidden md:block" />
+            {/* DARK OVERLAY */}
+            <div className="absolute inset-0 bg-black/40 md:bg-black/50" />
           </div>
         ))}
       </div>
 
-      {/* CONTENT - Hidden on mobile because mobile images have text baked in */}
-      <div className="absolute inset-0 z-10 hidden md:flex items-center">
+      {/* CONTENT */}
+      <div className="absolute inset-0 z-10 flex items-center">
         <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
 
           <div className="max-w-xl text-white">
 
             {/* TAG */}
-            <span className="inline-block mb-3 rounded-full bg-black/40 px-3 py-1 text-[10px] md:text-xs tracking-widest text-gold">
+            <span className="inline-block mb-3 rounded-full bg-black/40 px-3 py-1 text-[10px] md:text-xs tracking-widest text-gold uppercase">
               AUTHENTIC · HOMEMADE · PICKLES & SNACKS
             </span>
 
             {/* TITLE */}
-            <h1 className="font-display text-2xl leading-tight md:text-5xl lg:text-6xl">
+            <h1 className="font-display text-4xl leading-tight md:text-5xl lg:text-6xl">
               {slides[i].title}
             </h1>
 
             {/* SUBTEXT */}
-            <p className="mt-3 text-sm md:text-lg text-white/90">
+            <p className="mt-3 text-base md:text-lg text-white/90">
               {slides[i].sub}
             </p>
 
             {/* BUTTONS */}
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 to="/products"
-                className="rounded-full bg-cream px-5 py-2.5 text-sm font-semibold text-forest"
+                className="rounded-full bg-cream px-6 py-3 text-sm font-bold text-forest shadow-lg hover:scale-105 transition"
               >
                 Shop Now
               </Link>
@@ -116,7 +116,7 @@ function Hero() {
               <a
                 href={WHATSAPP_GROUP}
                 target="_blank"
-                className="rounded-full border border-white px-5 py-2.5 text-sm"
+                className="rounded-full border-2 border-white/80 px-6 py-3 text-sm font-semibold backdrop-blur-sm hover:bg-white/10 transition"
               >
                 Join WhatsApp Group
               </a>
