@@ -95,18 +95,18 @@ export function Navbar() {
           open ? "max-h-[600px] border-t border-border bg-cream/95 backdrop-blur-lg shadow-inner" : "max-h-0"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-6">
           <nav className="grid gap-2">
             {links.map(({ to, label, Icon }) => (
               <Link
                 key={to}
                 to={to}
                 onClick={() => setOpen(false)}
-                className="group flex items-center gap-4 rounded-2xl px-4 py-4 text-lg font-semibold text-forest/90 transition-all active:scale-95 hover:bg-forest/5"
+                className="group flex items-center gap-4 rounded-2xl px-4 py-2.5 text-base font-semibold text-forest/90 transition-all active:scale-95 hover:bg-forest/5"
                 activeProps={{ className: "group bg-forest text-cream hover:bg-forest hover:text-cream shadow-soft" }}
                 activeOptions={{ exact: to === "/" }}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-forest/5 group-[.active]:bg-white/20 transition-colors">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-forest/5 group-[.active]:bg-white/20 transition-colors">
                   <Icon className="h-5 w-5" />
                 </div>
                 {label}
@@ -117,9 +117,9 @@ export function Navbar() {
                 openCart(true);
                 setOpen(false);
               }}
-              className="flex items-center gap-4 rounded-2xl px-4 py-4 text-lg font-semibold text-forest/90 transition-all active:scale-95 hover:bg-forest/5"
+              className="flex items-center gap-4 rounded-2xl px-4 py-2.5 text-base font-semibold text-forest/90 transition-all active:scale-95 hover:bg-forest/5"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 text-forest-deep relative">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gold/10 text-forest-deep relative">
                 <ShoppingCart className="h-5 w-5" />
                 {count > 0 && (
                   <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-gold text-[8px] font-bold text-forest-deep">
@@ -137,7 +137,7 @@ export function Navbar() {
             <Link
               to="/products"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-center gap-3 rounded-full gradient-forest px-6 py-4 text-base font-bold text-cream shadow-soft active:scale-95 transition-transform"
+              className="flex items-center justify-center gap-3 rounded-full gradient-forest px-6 py-3 text-base font-bold text-cream shadow-soft active:scale-95 transition-transform"
             >
               <ShoppingBag className="h-5 w-5" />
               Shop Now
@@ -146,7 +146,7 @@ export function Navbar() {
               href={WHATSAPP_GROUP}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 rounded-full gradient-gold px-6 py-4 text-base font-bold text-forest-deep shadow-soft active:scale-95 transition-transform"
+              className="flex items-center justify-center gap-3 rounded-full gradient-gold px-6 py-3 text-base font-bold text-forest-deep shadow-soft active:scale-95 transition-transform"
             >
               <WhatsAppIcon className="h-5 w-5" />
               Join WhatsApp Group

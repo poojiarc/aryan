@@ -19,7 +19,7 @@ export interface Product {
 }
 
 export const CATEGORIES: { id: Category; label: string; emoji: string; blurb: string; image?: string }[] = [
-  { id: "veg-pickles", label: "Veg Pickle", emoji: "🥭", blurb: "Sun-cured & spice-rich", image: "/products/mangopickle.jpg" },
+  { id: "veg-pickles", label: "Veg Pickles", emoji: "🥭", blurb: "Sun-cured & spice-rich", image: "/products/mangopickle.jpg" },
   { id: "non-veg-pickles", label: "Non-Veg Pickles", emoji: "🍗", blurb: "Slow-cooked, bold heat", image: "/products/prawnspickle.jpg" },
   { id: "snacks", label: "Snacks", emoji: "🥨", blurb: "Crunchy & moreish", image: "/products/murukulu.jpg" },
   { id: "sweets", label: "Sweets", emoji: "🍬", blurb: "Festive & handcrafted", image: "/products/madatakaja.jpg" },
